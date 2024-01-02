@@ -14,24 +14,30 @@ export interface Database {
           complete: boolean
           created_at: string
           gift: string
+          gifter: string
           id: string
           letter: string | null
+          sent_at: string | null
           user_id: string
         }
         Insert: {
           complete?: boolean
           created_at?: string
           gift: string
+          gifter: string
           id?: string
           letter?: string | null
+          sent_at?: string | null
           user_id: string
         }
         Update: {
           complete?: boolean
           created_at?: string
           gift?: string
+          gifter?: string
           id?: string
           letter?: string | null
+          sent_at?: string | null
           user_id?: string
         }
         Relationships: [
