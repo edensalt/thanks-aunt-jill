@@ -1,7 +1,9 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import AuthButtonClient from "../auth-button-client";
+import GoogleButton from "./google-button";
+
+export const dynamic = 'force-dynamic'
 
 export default async function Login() {
   const supabase = createServerComponentClient<Database>({ cookies });
@@ -14,5 +16,11 @@ export default async function Login() {
     redirect("/");
   }
 
-  return <AuthButtonClient session={session} />;
+  return (
+    <div className="bg-gray-900 text-white min-h-screen flex">
+      <div className="flex-1 flex justify-center items-center">
+        <GoogleButton />
+      </div>
+    </div>
+  );
 }

@@ -1,4 +1,4 @@
-import CardWrapper from "@/app/ui/stats";
+import CardWrapper from "@/app/ui/dashboard/stats";
 import { Suspense } from "react";
 import {
   CardsSkeleton,
@@ -6,8 +6,8 @@ import {
   RevenueChartSkeleton,
 } from "../../ui/skeletons";
 import { Metadata } from "next";
-import OldestPending from "@/app/ui/oldestPending";
-import RecentlySent from "@/app/ui/recentlySent";
+import OldestPending from "@/app/ui/dashboard/oldestPending";
+import RecentlySent from "@/app/ui/dashboard/recentlySent";
 
 export const metadata: Metadata = {
   title: "Home",

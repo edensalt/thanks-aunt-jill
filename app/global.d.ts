@@ -1,4 +1,4 @@
-import { Database as DB } from "@/lib/database.types";
+import { Database as DB } from "@/app/lib/database.types";
 
 type Card = DB['public']['Tables']['cards']['Row']
 

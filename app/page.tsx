@@ -33,7 +33,7 @@ export default async function Home() {
 
   return (
     <>
-      <AuthButtonServer />
+      
       <div className="flex">
         <h1>
           {totalIncompleteCards} incomplete card

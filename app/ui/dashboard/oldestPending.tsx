@@ -4,32 +4,11 @@ import { redirect } from "next/navigation";
 
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import { formatDateToLocal } from "@/lib/utils";
+import { formatDateToLocal } from "@/app/lib/utils";
+import { fetchOldestPendingCards } from "@/app/lib/data";
 
-export default async function RecentlySent() {
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  if (!session) {
-    redirect("/login");
-  }
-
-  const { data } = await supabase
-    .from("cards")
-    .select("*, author: profiles(*)")
-    .eq('complete', true)
-    .order("created_at", { ascending: false })
-    .limit(5);
-
-  const pendingCards =
-    data?.map((card) => ({
-      ...card,
-      author: Array.isArray(card.author) ? card.author[0] : card.author,
-    })) ?? [];
-
+export default async function OldestPending() {
+  const oldestPendingCards = await fetchOldestPendingCards();
 
   return (
     <div className="flex w-full flex-col md:col-span-4">
@@ -40,10 +19,10 @@ export default async function RecentlySent() {
         {/* NOTE: comment in this code when you get to this point in the course */}
 
         <div className="bg-white px-6">
-          {pendingCards.map((pendingCard, i) => {
+          {oldestPendingCards.map((oldestPendingCard, i) => {
             return (
               <div
-                key={pendingCard.id}
+                key={oldestPendingCard.id}
                 className={clsx(
                   'flex flex-row items-center justify-between py-4',
                   {
@@ -59,17 +38,17 @@ export default async function RecentlySent() {
                   />
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold md:text-base">
-                      {pendingCard.gift}
+                      {oldestPendingCard.gift}
                     </p>
                     <p className="hidden text-sm text-gray-500 sm:block">
-                      {pendingCard.gifter}
+                      {oldestPendingCard.gifter}
                     </p>
                   </div>
                 </div>
                 <p
                   className={`truncate text-sm font-medium md:text-base`}
                 >
-                  {pendingCard.sent_at !== null ? formatDateToLocal(pendingCard.sent_at) : null}
+                  {formatDateToLocal(oldestPendingCard.created_at)}
                 </p>
               </div>
             );
