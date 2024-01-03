@@ -5,6 +5,12 @@ import { redirect } from "next/navigation";
 import NewCard from "./new-card";
 import CardStatus from "./card-status";
 import Cards from "./cards";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+};
+
 
 export default async function Home() {
   const supabase = createServerComponentClient<Database>({ cookies });
