@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 // import { fetchInvoicesPages } from '@/app/lib/data';
 import { Metadata } from 'next';
 import { SearchGift, SearchGifter } from '@/app/ui/search';
+import { fetchCardPages } from '@/app/lib/data';
 
 export const metadata: Metadata = {
   title: 'Cards',
@@ -24,8 +25,7 @@ export default async function Page({
   const gifterQuery = searchParams?.gifterQuery || '';
   const currentPage = Number(searchParams?.page) || 1;
 
-  // const totalPages = await fetchInvoicesPages(query);
-  const totalPages = 6
+  const totalPages = await fetchCardPages(giftQuery, gifterQuery);
 
   return (
     <div className="w-full">

@@ -99,7 +99,7 @@ export async function fetchRecentlySentCards() {
 
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 2;
 
 export async function fetchFilteredCards(
   giftQuery: string,
@@ -175,43 +175,35 @@ export async function fetchCardById(id: string) {
   }
 }
 
-// export async function fetchCardsByPages(
-//   giftQuery: string,
-//   gifterQuery: string,
-// ) {
-//   noStore();
+export async function fetchCardPages(
+  giftQuery: string,
+  gifterQuery: string,
+) {
+  noStore();
 
-//   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  const supabase = createServerComponentClient<Database>({ cookies });
 
+  try {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+  
+    if (!session) {
+      redirect("/login");
+    }
+  
+    const { count } = await supabase
+      .from("cards")
+      .select('*', { count: 'exact', head: true })
+      .ilike('gift', `%${giftQuery}%`)
+      .ilike('gifter', `%${gifterQuery}%`)
+  
+      const totalPages = count ? Math.ceil(count / ITEMS_PER_PAGE) : 0;
 
-//   const supabase = createServerComponentClient<Database>({ cookies });
-
-//   try {
-//     const {
-//       data: { session },
-//     } = await supabase.auth.getSession();
   
-//     if (!session) {
-//       redirect("/login");
-//     }
-  
-//     const { data } = await supabase
-//       .from("cards")
-//       .select("*, author: profiles(*)")
-//       .ilike('gift', `%${giftQuery}%`)
-//       .ilike('gifter', `%${gifterQuery}%`)
-//       .order("gift", { ascending: true })
-//       .range(offset, offset + ITEMS_PER_PAGE - 1)
-  
-//     const cards =
-//       data?.map((card) => ({
-//         ...card,
-//         author: Array.isArray(card.author) ? card.author[0] : card.author,
-//       })) ?? [];
-  
-//       return cards;
-//   } catch (error) {
-//     console.error('Database Error:', error);
-//     throw new Error('Failed to fetch recently sent cards.');
-//   }
-// }
+      return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total pages.');
+  }
+}
