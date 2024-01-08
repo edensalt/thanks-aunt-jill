@@ -35,6 +35,39 @@ export async function fetchAllCards() {
   }
 }
 
+export async function fetchMostRecentCard() {
+  noStore();
+
+  const supabase = createServerComponentClient<Database>({ cookies });
+
+  try {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+  
+    if (!session) {
+      redirect("/login");
+    }
+  
+    const { data } = await supabase
+      .from("cards")
+      .select("*, author: profiles(*)")
+      .order("created_at", { ascending: false })
+      .limit(1)
+  
+    const card =
+      data?.map((card) => ({
+        ...card,
+        author: Array.isArray(card.author) ? card.author[0] : card.author,
+      })) ?? [];
+  
+      return card;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch recently sent cards.');
+  }
+}
+
 export async function fetchOldestPendingCards() {
   noStore();
 
