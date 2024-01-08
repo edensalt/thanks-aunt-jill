@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Edit Invoice',
+  title: 'View Card',
 };
  
 export default async function Page({ params }: { params: { id: string } }) {
@@ -23,12 +23,12 @@ export default async function Page({ params }: { params: { id: string } }) {
           { label: 'Cards', href: '/dashboard/cards' },
           {
             label: 'Edit Card',
-            href: `/dashboard/cards/${id}/edit`,
+            href: `/dashboard/cards/${id}/view`,
             active: true,
           },
         ]}
       />
-      <div>edit card</div>
+      <div>view card</div>
     </main>
   );
 }

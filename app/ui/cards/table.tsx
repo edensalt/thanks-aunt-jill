@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { EditCard, DeleteInvoice } from '@/app/ui/invoices/buttons';
-import InvoiceStatus from '@/app/ui/invoices/status';
+import { EditCard, DeleteInvoice } from '@/app/ui/cards/buttons';
+import InvoiceStatus from '@/app/ui/cards/status';
 import { formatDateToLocal } from '@/app/lib/utils';
 import { fetchFilteredCards } from '@/app/lib/data';
 import CardStatus from '@/app/card-status';
