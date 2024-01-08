@@ -1,9 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import AuthButtonServer from "./auth-button-server";
 import { redirect } from "next/navigation";
-import NewCard from "./new-card";
-import CardStatus from "./card-status";
 import Cards from "./cards";
 import { Metadata } from "next";
 
@@ -49,7 +46,6 @@ export default async function Home() {
           {totalCompleteCards} sent card{totalCompleteCards !== 1 ? "s" : ""}
         </h1>
       </div>
-      <NewCard />
       <Cards cards={cards} />
     </>
   );
