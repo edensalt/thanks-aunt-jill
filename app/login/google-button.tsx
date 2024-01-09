@@ -20,9 +20,10 @@ export default function GitHubButton() {
       <Image
         src={"/Gmail_Icon.original.png"}
         alt="Github logo"
-        width={100}
-        height={100}
+        width={80}
+        height={80}
       />
+      <div className="font-thin text-sm">Login</div>
     </button>
   );
 }
