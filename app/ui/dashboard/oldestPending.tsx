@@ -14,6 +14,7 @@ export default async function OldestPending() {
     <div className="flex w-full flex-col md:col-span-4">
       <h2 className={`mb-4 text-xl md:text-2xl`}>Oldest Pending</h2>
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
+      {oldestPendingCards?.length === 0 && <p className='flex justify-start'>No cards pending</p>}
         <div className="bg-white px-6">
           {oldestPendingCards.map((oldestPendingCard, i) => {
             return (

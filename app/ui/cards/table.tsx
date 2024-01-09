@@ -21,6 +21,7 @@ export default async function CardsTable({
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+          {cards?.length === 0 && <p className='flex justify-center'>No results</p>}
           <div className="md:hidden">
             {cards?.map((card) => (
               <div
@@ -39,7 +40,7 @@ export default async function CardsTable({
                     <p className="text-xl font-medium">
                     {formatDateToLocal(card.created_at)}
                     </p>
-                    <p>{card.sent_at === null ? "" : formatDateToLocal(card.sent_at)}</p>
+                    <p className='text-gray-500'>{card.sent_at === null ? "Not sent" : formatDateToLocal(card.sent_at)}</p>
                   </div>
                   <div className="flex justify-end gap-2">
                     <ViewCard id={card.id} />

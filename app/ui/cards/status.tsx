@@ -4,10 +4,12 @@ import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import { CheckBadgeIcon, ClockIcon } from "@heroicons/react/24/outline";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useState } from "react";
 
 export const dynamic = "force-dynamic";
 
 export default function CardStatus({ card }: { card: CardWithAuthor }) {
+  const [focus, setFocus] = useState(false);
   const router = useRouter();
   const handleStatusUpdate = async () => {
     const supabase = createClientComponentClient<Database>();
@@ -35,25 +37,43 @@ export default function CardStatus({ card }: { card: CardWithAuthor }) {
     }
   };
   return (
-    <button onClick={handleStatusUpdate}>
+    <button
+      onClick={handleStatusUpdate}
+      onMouseEnter={() => setFocus(true)}
+      onMouseLeave={() => setFocus(false)}
+    >
       <span
         className={clsx(
           "inline-flex items-center rounded-full px-2 py-1 text-xs",
           {
-            "bg-gray-100 text-gray-500": !card.complete,
-            "bg-[#f6afb9] text-white": card.complete,
+            "bg-gray-100 hover:bg-[#f6afb9] text-gray-500 hover:text-white stroke-white hover:stroke-gray-500":
+              !card.complete,
+            "bg-[#f6afb9] hover:bg-gray-100 text-white hover:text-gray-500 stroke-gray-500 hover:stroke-white":
+              card.complete,
           }
         )}
       >
         {card.complete ? (
+          focus ? (
+            <>
+              Undo
+              <ClockIcon className="ml-1 w-4" />
+            </>
+          ) : (
+            <>
+              Complete
+              <CheckBadgeIcon className="ml-1 w-4" />
+            </>
+          )
+        ) : focus ? (
           <>
-            Complete
-            <CheckBadgeIcon className="ml-1 w-4 stroke-white" />
+            Sent
+            <CheckBadgeIcon className="ml-1 w-4" />
           </>
         ) : (
           <>
             Pending
-            <ClockIcon className="ml-1 w-4 stroke-gray-500" />
+            <ClockIcon className="ml-1 w-4" />
           </>
         )}
       </span>

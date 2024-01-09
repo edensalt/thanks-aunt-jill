@@ -14,6 +14,7 @@ export default async function RecentlySent() {
     <div className="flex w-full flex-col md:col-span-4">
       <h2 className={`mb-4 text-xl md:text-2xl`}>Recently Sent</h2>
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
+      {recentlySentCards?.length === 0 && <p className='flex justify-start'>No cards recently sent</p>}
         <div className="bg-white px-6">
           {recentlySentCards.map((recentlySentCard, i) => {
             return (
