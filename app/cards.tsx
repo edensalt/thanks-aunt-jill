@@ -1,9 +1,10 @@
 'use client'
 
 import { useEffect } from "react";
-import CardStatus from "./card-status";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
+import CardStatus from "./card-status";
 
 export default function Cards({ cards }: { cards: CardWithAuthor[] }) {
 

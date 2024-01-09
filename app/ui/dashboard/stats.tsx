@@ -2,17 +2,16 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-
 import {
-  BanknotesIcon,
+  CheckBadgeIcon,
   ClockIcon,
-  InboxIcon,
+  EnvelopeIcon,
 } from '@heroicons/react/24/outline';
 
 const iconMap = {
-  sent: BanknotesIcon,
+  sent: CheckBadgeIcon,
   pending: ClockIcon,
-  total: InboxIcon,
+  total: EnvelopeIcon,
 };
 
 export default async function CardWrapper() {
@@ -41,11 +40,9 @@ export default async function CardWrapper() {
   const totalIncompleteCards = cards.length - totalCompleteCards;
   return (
     <>
-      {/* NOTE: comment in this code when you get to this point in the course */}
-
       <Card title="Sent" value={totalCompleteCards} type="sent" />
       <Card title="Pending" value={totalIncompleteCards} type="pending" />
-      <Card title="Total Invoices" value={cards.length} type="total" />
+      <Card title="Total Cards" value={cards.length} type="total" />
     </>
   );
 }

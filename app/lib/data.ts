@@ -3,70 +3,6 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { unstable_noStore as noStore } from 'next/cache';
 
-export async function fetchAllCards() {
-  noStore();
-
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  try {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-  
-    if (!session) {
-      redirect("/login");
-    }
-  
-    const { data } = await supabase
-      .from("cards")
-      .select("*, author: profiles(*)")
-      .order("gift", { ascending: true });
-  
-    const cards =
-      data?.map((card) => ({
-        ...card,
-        author: Array.isArray(card.author) ? card.author[0] : card.author,
-      })) ?? [];
-  
-      return cards;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch recently sent cards.');
-  }
-}
-
-export async function fetchMostRecentCard() {
-  noStore();
-
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  try {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-  
-    if (!session) {
-      redirect("/login");
-    }
-  
-    const { data } = await supabase
-      .from("cards")
-      .select("*, author: profiles(*)")
-      .order("created_at", { ascending: false })
-      .limit(1)
-  
-    const card =
-      data?.map((card) => ({
-        ...card,
-        author: Array.isArray(card.author) ? card.author[0] : card.author,
-      })) ?? [];
-  
-      return card;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch recently sent cards.');
-  }
-}
 
 export async function fetchOldestPendingCards() {
   noStore();
@@ -138,6 +74,8 @@ export async function fetchFilteredCards(
   giftQuery: string,
   gifterQuery: string,
   currentPage: number,
+  order: string,
+  ascending: boolean
 ) {
   noStore();
 
@@ -160,7 +98,7 @@ export async function fetchFilteredCards(
       .select("*, author: profiles(*)")
       .ilike('gift', `%${giftQuery}%`)
       .ilike('gifter', `%${gifterQuery}%`)
-      .order("gift", { ascending: true })
+      .order(order, { ascending: ascending })
       .range(offset, offset + ITEMS_PER_PAGE - 1)
   
     const cards =
@@ -204,7 +142,7 @@ export async function fetchCardById(id: string) {
       return cards[0];
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoice.');
+    throw new Error('Failed to fetch cards.');
   }
 }
 

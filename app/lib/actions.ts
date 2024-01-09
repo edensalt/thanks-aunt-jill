@@ -2,12 +2,12 @@
 
 import { z } from 'zod';
 import { cookies } from "next/headers";
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-import { generateLetter } from "@/app/lib/chat";
-import { v4 as uuidv4 } from 'uuid';
-
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { v4 as uuidv4 } from 'uuid';
+import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+
+import { generateLetter } from "@/app/lib/chat";
 import { Card } from '../global';
 
 const FormSchema = z.object({
@@ -55,7 +55,7 @@ export async function createCard(prevState: State, formData: FormData) {
     } = await supabase.auth.getUser();
 
     if (user) {
-      const letter = await generateLetter(gift);
+      const letter = await generateLetter(gift, gifter);
       const id = uuidv4();
       routeID = id;
       await supabase
@@ -66,10 +66,10 @@ export async function createCard(prevState: State, formData: FormData) {
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
-      message: 'Database Error: Failed to Create Invoice.',
+      message: 'Database Error: Failed to Create Card.',
     };
   }
-  // Revalidate the cache for the invoices page and redirect the user.
+  // Revalidate the cache for the cards page and redirect the user.
   revalidatePath('/dashboard/cards');
   redirect(`/dashboard/cards/${routeID}/view`);
 }
@@ -83,7 +83,7 @@ export async function generateNewLetter(card: Card) {
     } = await supabase.auth.getUser();
 
     if (user) {
-      const letter = await generateLetter(card.gift);
+      const letter = await generateLetter(card.gift, card.gifter);
       await supabase
         .from("cards")
         .update({ letter: letter })
@@ -96,8 +96,8 @@ export async function generateNewLetter(card: Card) {
       message: 'Database Error: Failed to Update Card Letter.',
     };
   }
-  // Revalidate the cache for the invoices page and redirect the user.
-  revalidatePath(`/dashboard/cards/${card.id}/view`);
+  // Revalidate the cache for the cards page and redirect the user.
+  revalidatePath(`/dashboard/cards/`);
   redirect(`/dashboard/cards/${card.id}/view`);
 }
 
@@ -110,11 +110,20 @@ export async function updateStatus(card: Card) {
     } = await supabase.auth.getUser();
 
     if (user) {
-      await supabase
-        .from("cards")
-        .update({ complete: !card.complete })
-        .eq('id', card.id)
-        console.debug('SUCCESS: Update card status')
+      if (!card.complete) {
+        await supabase
+          .from("cards")
+          .update({
+            complete: true,
+            sent_at: `${new Date().toISOString().toLocaleString()}`,
+          })
+          .eq("id", card.id);
+      } else {
+        await supabase
+          .from("cards")
+          .update({ complete: false, sent_at: null })
+          .eq("id", card.id);
+      }
     }
   } catch (error) {
     // If a database error occurs, return a more specific error.
@@ -122,7 +131,7 @@ export async function updateStatus(card: Card) {
       message: 'Database Error: Failed to Update Card Status.',
     };
   }
-  // Revalidate the cache for the invoices page and redirect the user.
+  // Revalidate the cache for the cards page and redirect the user.
   revalidatePath(`/dashboard/cards/${card.id}/view`);
   redirect(`/dashboard/cards/${card.id}/view`);
 }
@@ -148,7 +157,7 @@ export async function deleteCard(card: Card) {
       message: 'Database Error: Failed to Delete Card.',
     };
   }
-  // Revalidate the cache for the invoices page and redirect the user.
+  // Revalidate the cache for the cards page and redirect the user.
   revalidatePath(`/dashboard/cards`);
   redirect(`/dashboard/cards`);
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import {
   GiftIcon,
@@ -8,28 +9,25 @@ import {
   CalendarIcon,
   CheckBadgeIcon,
   ClockIcon,
+  ArrowPathIcon,
 } from "@heroicons/react/24/outline";
 
-import { useFormState } from "react-dom";
 import {
-  createCard,
   deleteCard,
   generateNewLetter,
   updateStatus,
 } from "@/app/lib/actions";
 import { Card } from "@/app/global";
-import { useState } from "react";
 import { formatDateToLocal } from "@/app/lib/utils";
 
 export const dynamic = "force-dynamic";
 
 export default function ViewFormCard({ card }: { card: Card }) {
-  const initialState = { message: "", errors: {} };
-  const [state, dispatch] = useFormState(createCard, initialState);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   return (
-    <form action={dispatch}>
+    <div>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         <div className="mb-4">
           <div className="grid md:grid-cols-2 grid-cols-1 w-full md:gap-4 gap-2 align-center">
@@ -117,13 +115,28 @@ export default function ViewFormCard({ card }: { card: Card }) {
             Confirm Delete
           </button>
         )}
-        <button
-          className="flex h-10 items-center rounded-lg bg-yellow-100 px-4 text-sm font-medium text-yellow-600 transition-colors hover:bg-yellow-200"
-          onClick={() => generateNewLetter(card)}
-          type="button"
-        >
-          {card.letter ? "Regenerate letter" : "Generate letter"}
-        </button>
+        {submitting ? (
+          <button
+            className="flex h-10 items-center rounded-lg bg-yellow-100 px-4 text-sm font-medium text-yellow-600 transition-colors hover:bg-yellow-200"
+            type="button"
+            disabled
+          >
+            <ArrowPathIcon className="animate-spin stroke-yellow-600 h-6 w-6" />{" "}
+            <p className="ml-2">Generating Letter</p>
+          </button>
+        ) : (
+          <button
+            className="flex h-10 items-center rounded-lg bg-yellow-100 px-4 text-sm font-medium text-yellow-600 transition-colors hover:bg-yellow-200"
+            onClick={() => {
+              setSubmitting(true);
+              generateNewLetter(card).then(() => setSubmitting(false));
+            }}
+            type="button"
+          >
+            {card.letter ? "Regenerate letter" : "Generate letter"}
+          </button>
+        )}
+
         {/* TODO: Have loader after submitting form */}
         {card.complete ? (
           <button
@@ -143,6 +156,6 @@ export default function ViewFormCard({ card }: { card: Card }) {
           </button>
         )}
       </div>
-    </form>
+    </div>
   );
 }

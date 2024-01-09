@@ -1,5 +1,5 @@
-import { CheckIcon, ClockIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
+import { CheckIcon, ClockIcon } from '@heroicons/react/24/outline';
 
 export default function CardStatus({ complete }: { complete: boolean }) {
   return (

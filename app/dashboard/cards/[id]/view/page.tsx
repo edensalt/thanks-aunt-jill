@@ -1,11 +1,13 @@
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+
 import Breadcrumbs from '@/app/ui/cards/breadcrumbs';
 import { fetchCardById } from '@/app/lib/data';
-import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
 import ViewFormCard from '@/app/ui/cards/view-form';
 
 export const metadata: Metadata = {
   title: 'View Card',
+  description: 'View your thank you card and generate new letter content powered by AI.'
 };
  
 export default async function Page({ params }: { params: { id: string } }) {
@@ -22,7 +24,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         breadcrumbs={[
           { label: 'Cards', href: '/dashboard/cards' },
           {
-            label: `View Card for ${card.gift}`,
+            label: `${card.gift} from ${card.gifter}`,
             href: `/dashboard/cards/${id}/view`,
             active: true,
           },
