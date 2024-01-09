@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { EditCard, DeleteInvoice } from '@/app/ui/cards/buttons';
+import { ViewCard, DeleteInvoice } from '@/app/ui/cards/buttons';
 import InvoiceStatus from '@/app/ui/cards/status';
 import { formatDateToLocal } from '@/app/lib/utils';
 import { fetchFilteredCards } from '@/app/lib/data';
@@ -41,8 +41,8 @@ export default async function InvoicesTable({
                     <p>{card.sent_at === null ? "" : formatDateToLocal(card.sent_at)}</p>
                   </div>
                   <div className="flex justify-end gap-2">
-                    <EditCard id={card.id} />
-                    <DeleteInvoice id={card.id} />
+                    <ViewCard id={card.id} />
+                    {/* <DeleteInvoice id={card.id} /> */}
                   </div>
                 </div>
               </div>
@@ -67,7 +67,7 @@ export default async function InvoicesTable({
                   Status
                 </th>
                 <th scope="col" className="relative py-3 pl-6 pr-3">
-                  <span className="sr-only">Edit</span>
+                  <span className="sr-only">View</span>
                 </th>
               </tr>
             </thead>
@@ -97,8 +97,8 @@ export default async function InvoicesTable({
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                      <EditCard id={card.id} />
-                      <DeleteInvoice id={card.id} />
+                      <ViewCard id={card.id} />
+                      {/* <DeleteInvoice id={card.id} /> */}
                     </div>
                   </td>
                 </tr>

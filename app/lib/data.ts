@@ -86,7 +86,7 @@ export async function fetchOldestPendingCards() {
       .select("*, author: profiles(*)")
       .eq('complete', false)
       .order("created_at", { ascending: true })
-      .limit(5);
+      .limit(4);
 
     const pendingCards =
       data?.map((card) => ({
@@ -117,7 +117,7 @@ export async function fetchRecentlySentCards() {
       .select("*, author: profiles(*)")
       .eq('complete', true)
       .order("created_at", { ascending: false })
-      .limit(5);
+      .limit(4);
     const sentCards =
       data?.map((card) => ({
         ...card,
@@ -132,7 +132,7 @@ export async function fetchRecentlySentCards() {
 
 }
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 6;
 
 export async function fetchFilteredCards(
   giftQuery: string,
