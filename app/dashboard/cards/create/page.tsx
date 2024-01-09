@@ -4,7 +4,7 @@ import Breadcrumbs from '@/app/ui/cards/breadcrumbs';
 import CreateCardForm from '@/app/ui/cards/create-form';
 
 export const metadata: Metadata = {
-  title: 'Create Card',
+  title: 'Create Card | Thanks Aunt Jill',
   description: 'Create a new thank you card and generate a letter powered by AI.'
 };
  

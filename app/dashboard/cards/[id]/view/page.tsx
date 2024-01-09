@@ -6,7 +6,7 @@ import { fetchCardById } from '@/app/lib/data';
 import ViewFormCard from '@/app/ui/cards/view-form';
 
 export const metadata: Metadata = {
-  title: 'View Card',
+  title: 'View Card | Thanks Aunt Jill',
   description: 'View your thank you card and generate new letter content powered by AI.'
 };
  

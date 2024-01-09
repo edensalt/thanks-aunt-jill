@@ -9,7 +9,7 @@ import { SearchGift, SearchGifter } from '@/app/ui/search';
 import { fetchCardPages } from '@/app/lib/data';
 
 export const metadata: Metadata = {
-  title: 'Cards',
+  title: 'Cards | Thanks Aunt Jill',
   description: 'View all of your thank you cards.'
 };
 
