@@ -1,13 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { cookies } from "next/headers";
-
-import { v4 as uuidv4 } from "uuid";
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { GiftIcon, UserIcon } from "@heroicons/react/24/outline";
 
-import { generateLetter } from "@/app/lib/chat";
 import { useFormState } from "react-dom";
 import { createCard } from "@/app/lib/actions";
 

@@ -16,7 +16,7 @@ const FormSchema = z.object({
   id: z.string(),
 });
 
-const CreateCard = FormSchema.omit({ id: true });
+const CreateCard = FormSchema.omit({ id: true, letter: true });
 
 export type State = {
   errors?: {
@@ -27,12 +27,13 @@ export type State = {
 };
 
 export async function createCard(prevState: State, formData: FormData) {
+  let routeID = "";
   // Validate form using Zod
   const validatedFields = CreateCard.safeParse({
     gift: formData.get('gift'),
     gifter: formData.get('gifter'),
   });
- 
+
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
     return {
@@ -43,6 +44,7 @@ export async function createCard(prevState: State, formData: FormData) {
  
   // Prepare data for insertion into the database
   const { gift, gifter } = validatedFields.data;
+  console.debug('got the form data: ', validatedFields.data)
  
   // Insert data into the database
   try {
@@ -52,12 +54,16 @@ export async function createCard(prevState: State, formData: FormData) {
     } = await supabase.auth.getUser();
 
     if (user) {
+      console.log('user')
       const letter = await generateLetter(gift);
+      console.log('success')
       const id = uuidv4();
+      routeID = id;
       await supabase
         .from("cards")
         .insert({ user_id: user.id, id, gift, gifter, letter});
 
+        console.log('success')
     }
   } catch (error) {
     // If a database error occurs, return a more specific error.
@@ -70,5 +76,5 @@ export async function createCard(prevState: State, formData: FormData) {
   // Revalidate the cache for the invoices page and redirect the user.
   revalidatePath('/dashboard/cards');
   console.log('revalidated')
-  redirect('/dashboard/cards/');
+  redirect(`/dashboard/cards/${routeID}/view`);
 }
