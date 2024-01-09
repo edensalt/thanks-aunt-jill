@@ -26,7 +26,7 @@ export default function AuthButtonClient({
 
   const signOutHandler = async () => {
     await supabase.auth.signOut();
-    router.refresh();
+    router.replace('/login')
   };
 
   return session ? (
