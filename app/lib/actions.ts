@@ -2,12 +2,12 @@
 
 import { z } from 'zod';
 import { cookies } from "next/headers";
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-import { generateLetter } from "@/app/lib/chat";
-import { v4 as uuidv4 } from 'uuid';
-
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { v4 as uuidv4 } from 'uuid';
+import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+
+import { generateLetter } from "@/app/lib/chat";
 import { Card } from '../global';
 
 const FormSchema = z.object({
@@ -66,10 +66,10 @@ export async function createCard(prevState: State, formData: FormData) {
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
-      message: 'Database Error: Failed to Create Invoice.',
+      message: 'Database Error: Failed to Create Card.',
     };
   }
-  // Revalidate the cache for the invoices page and redirect the user.
+  // Revalidate the cache for the cards page and redirect the user.
   revalidatePath('/dashboard/cards');
   redirect(`/dashboard/cards/${routeID}/view`);
 }
@@ -131,7 +131,7 @@ export async function updateStatus(card: Card) {
       message: 'Database Error: Failed to Update Card Status.',
     };
   }
-  // Revalidate the cache for the invoices page and redirect the user.
+  // Revalidate the cache for the cards page and redirect the user.
   revalidatePath(`/dashboard/cards/${card.id}/view`);
   redirect(`/dashboard/cards/${card.id}/view`);
 }
@@ -157,7 +157,7 @@ export async function deleteCard(card: Card) {
       message: 'Database Error: Failed to Delete Card.',
     };
   }
-  // Revalidate the cache for the invoices page and redirect the user.
+  // Revalidate the cache for the cards page and redirect the user.
   revalidatePath(`/dashboard/cards`);
   redirect(`/dashboard/cards`);
 }

@@ -2,7 +2,6 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-
 import {
   CheckBadgeIcon,
   ClockIcon,
@@ -41,8 +40,6 @@ export default async function CardWrapper() {
   const totalIncompleteCards = cards.length - totalCompleteCards;
   return (
     <>
-      {/* NOTE: comment in this code when you get to this point in the course */}
-
       <Card title="Sent" value={totalCompleteCards} type="sent" />
       <Card title="Pending" value={totalIncompleteCards} type="pending" />
       <Card title="Total Cards" value={cards.length} type="total" />

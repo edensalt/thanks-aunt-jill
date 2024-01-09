@@ -1,8 +1,9 @@
-import { ArrowPathIcon, CheckBadgeIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 import clsx from "clsx";
+
+import { ArrowPathIcon, CheckBadgeIcon } from "@heroicons/react/24/outline";
 import { formatDateToLocal } from "@/app/lib/utils";
 import { fetchRecentlySentCards } from "@/app/lib/data";
-import Link from "next/link";
 
 export default async function RecentlySent() {
   const recentlySentCards = await fetchRecentlySentCards();
@@ -11,8 +12,6 @@ export default async function RecentlySent() {
     <div className="flex w-full flex-col md:col-span-4">
       <h2 className={`mb-4 text-xl md:text-2xl`}>Recently Sent</h2>
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
-        {/* NOTE: comment in this code when you get to this point in the course */}
-
         <div className="bg-white px-6">
           {recentlySentCards.map((recentlySentCard, i) => {
             return (

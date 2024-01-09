@@ -1,9 +1,9 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import clsx from "clsx";
 import { CheckBadgeIcon, ClockIcon } from "@heroicons/react/24/outline";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import clsx from "clsx";
-import { useRouter } from "next/navigation";
 
 export default function CardStatus({ card }: { card: CardWithAuthor }) {
   const router = useRouter();

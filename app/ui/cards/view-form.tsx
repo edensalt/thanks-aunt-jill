@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import {
   GiftIcon,
@@ -11,15 +12,12 @@ import {
   ArrowPathIcon,
 } from "@heroicons/react/24/outline";
 
-import { useFormState } from "react-dom";
 import {
-  createCard,
   deleteCard,
   generateNewLetter,
   updateStatus,
 } from "@/app/lib/actions";
 import { Card } from "@/app/global";
-import { useState } from "react";
 import { formatDateToLocal } from "@/app/lib/utils";
 
 export const dynamic = "force-dynamic";

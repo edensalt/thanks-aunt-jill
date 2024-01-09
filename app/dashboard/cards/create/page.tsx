@@ -1,10 +1,11 @@
-// import Form from '@/app/ui/invoices/create-form';
+import { Metadata } from 'next';
+
 import Breadcrumbs from '@/app/ui/cards/breadcrumbs';
 import CreateCardForm from '@/app/ui/cards/create-form';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Create Card',
+  description: 'Create a new thank you card and generate a letter powered by AI.'
 };
  
 export default async function Page() {

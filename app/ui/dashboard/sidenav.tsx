@@ -1,8 +1,8 @@
 import Link from "next/link";
-import NavLinks from "./nav-links";
-import { PowerIcon } from "@heroicons/react/24/outline";
-import AuthButtonServer from "@/app/auth-button-server";
 import Image from "next/image";
+
+import NavLinks from "./nav-links";
+import AuthButtonServer from "@/app/auth-button-server";
 
 export default function SideNav() {
   return (

@@ -1,10 +1,9 @@
 import { ViewCard } from '@/app/ui/cards/buttons';
-import InvoiceStatus from '@/app/ui/cards/status';
 import { formatDateToLocal } from '@/app/lib/utils';
 import { fetchFilteredCards } from '@/app/lib/data';
 import CardStatus from '@/app/card-status';
 
-export default async function InvoicesTable({
+export default async function CardsTable({
   giftQuery,
   gifterQuery,
   currentPage,
@@ -41,7 +40,6 @@ export default async function InvoicesTable({
                   </div>
                   <div className="flex justify-end gap-2">
                     <ViewCard id={card.id} />
-                    {/* <DeleteInvoice id={card.id} /> */}
                   </div>
                 </div>
               </div>

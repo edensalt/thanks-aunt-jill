@@ -1,11 +1,18 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import GoogleButton from "./google-button";
 import Image from "next/image";
-import Link from "next/link";
+
+import GoogleButton from "./google-button";
+
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Login | Thanks Aunt Jill",
+  description: "Log in to or sign up for Thanks Aunt Jill, an AI-powered thank you card app.",
+};
 
 export default async function Login() {
   const supabase = createServerComponentClient<Database>({ cookies });
@@ -23,7 +30,7 @@ export default async function Login() {
       <div className="flex flex-col sm:flex-row justify-center items-center gap-12 md:divide-y-0 divide-y-2 md:divide-x-2 divide-x-0 w-full">
         <div className="h-40 w-40">
           <Image
-            src={"/logos.jpeg"}
+            src={"/logo.jpeg"}
             alt="Thanks Aunt Jill Logo"
             height={160}
             width={160}

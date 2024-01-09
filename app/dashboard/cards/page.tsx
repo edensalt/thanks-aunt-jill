@@ -1,15 +1,16 @@
+import { Suspense } from 'react';
+import { Metadata } from 'next';
+
 import Pagination from '@/app/ui/cards/pagination';
 import Table from '@/app/ui/cards/table';
 import { CreateCard } from '@/app/ui/cards/buttons';
-import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
-import { Suspense } from 'react';
-// import { fetchInvoicesPages } from '@/app/lib/data';
-import { Metadata } from 'next';
+import { CardsTableSkeleton } from '@/app/ui/skeletons';
 import { SearchGift, SearchGifter } from '@/app/ui/search';
 import { fetchCardPages } from '@/app/lib/data';
 
 export const metadata: Metadata = {
   title: 'Cards',
+  description: 'View all of your thank you cards.'
 };
 
 export default async function Page({
@@ -37,7 +38,7 @@ export default async function Page({
         <SearchGifter placeholder="Search by gifter..." />
         <CreateCard />
       </div>
-      <Suspense key={giftQuery + gifterQuery + currentPage} fallback={<InvoicesTableSkeleton />}>
+      <Suspense key={giftQuery + gifterQuery + currentPage} fallback={<CardsTableSkeleton />}>
         <Table giftQuery={giftQuery} gifterQuery={gifterQuery} currentPage={currentPage} />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">

@@ -1,11 +1,11 @@
 "use client";
 
-import { PowerIcon } from "@heroicons/react/24/outline";
 import {
   Session,
   createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import { PowerIcon } from "@heroicons/react/24/outline";
 
 export default function AuthButtonClient({
   session,
