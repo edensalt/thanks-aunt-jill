@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         breadcrumbs={[
           { label: 'Cards', href: '/dashboard/cards' },
           {
-            label: `View Card for ${card.gift}`,
+            label: `${card.gift} from ${card.gifter}`,
             href: `/dashboard/cards/${id}/view`,
             active: true,
           },

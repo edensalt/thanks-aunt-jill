@@ -10,7 +10,9 @@ import OldestPending from "@/app/ui/dashboard/oldestPending";
 import RecentlySent from "@/app/ui/dashboard/recentlySent";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Dashboard | Thanks Aunt Jill",
+  description: 'AI Generated Thank You Cards',
+
 };
 
 export default async function Page() {
