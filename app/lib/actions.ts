@@ -39,7 +39,7 @@ export async function createCard(prevState: State, formData: FormData) {
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Create Invoice.',
+      message: 'Missing Fields. Failed to Create Card.',
     };
   }
  
@@ -93,7 +93,33 @@ export async function generateNewLetter(card: Card) {
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
-      message: 'Database Error: Failed to Create Invoice.',
+      message: 'Database Error: Failed to Update Card Letter.',
+    };
+  }
+  // Revalidate the cache for the invoices page and redirect the user.
+  revalidatePath(`/dashboard/cards/${card.id}/view`);
+  redirect(`/dashboard/cards/${card.id}/view`);
+}
+
+export async function updateStatus(card: Card) {
+  // Insert data into the database
+  try {
+    const supabase = createServerActionClient<Database>({ cookies });
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      await supabase
+        .from("cards")
+        .update({ complete: !card.complete })
+        .eq('id', card.id)
+        console.debug('SUCCESS: Update card status')
+    }
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to Update Card Status.',
     };
   }
   // Revalidate the cache for the invoices page and redirect the user.
@@ -119,7 +145,7 @@ export async function deleteCard(card: Card) {
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
-      message: 'Database Error: Failed to Create Invoice.',
+      message: 'Database Error: Failed to Delete Card.',
     };
   }
   // Revalidate the cache for the invoices page and redirect the user.
