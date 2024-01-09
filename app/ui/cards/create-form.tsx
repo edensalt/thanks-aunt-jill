@@ -29,6 +29,7 @@ export default function CreateCardForm() {
                 type="string"
                 placeholder="Enter gift name"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                required
               />
               <GiftIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
@@ -54,8 +55,10 @@ export default function CreateCardForm() {
                 type="string"
                 placeholder="Enter person who gave you the gift"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                required
               />
               <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+            </div>
               <div id="customer-error" aria-live="polite" aria-atomic="true">
                 {state.errors?.gifter &&
                   state.errors.gifter.map((error: string) => (
@@ -64,7 +67,6 @@ export default function CreateCardForm() {
                     </p>
                   ))}
               </div>
-            </div>
           </div>
         </div>
       </div>
