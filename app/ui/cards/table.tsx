@@ -1,7 +1,7 @@
 import { ViewCard } from '@/app/ui/cards/buttons';
 import { formatDateToLocal } from '@/app/lib/utils';
 import { fetchFilteredCards } from '@/app/lib/data';
-import CardStatus from '@/app/card-status';
+import CardStatus from '@/app/ui/cards/status';
 
 export default async function CardsTable({
   giftQuery,
