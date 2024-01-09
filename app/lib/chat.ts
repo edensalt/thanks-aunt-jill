@@ -2,7 +2,7 @@ import OpenAI from "openai";
 
 const openai = new OpenAI();
 
-export async function generateLetter(gift: string) {
+export async function generateLetter(gift: string, gifter: string) {
 
   try {
     const getResponse = await openai.chat.completions.create({
@@ -15,7 +15,7 @@ export async function generateLetter(gift: string) {
         {
           role: "user",
           content:
-            `I just received the following gift: ${gift}. Please write me a thank you letter for it!`,
+            `I just received the following gift: ${gift}. This gift is from ${gifter}. Please write me a thank you letter for it!`,
         },
       ],
       model: "gpt-3.5-turbo",

@@ -32,7 +32,7 @@ export default async function OldestPending() {
               >
                 <div className="flex items-center">
                   <div className="mr-4 rounded-full w-8 h-8 bg-[#f6afb9] flex items-center justify-center">
-                    <ClockIcon className="w-6 h-6 stroke-pink-400" />
+                    <ClockIcon className="w-6 h-6 stroke-pink-700" />
                   </div>
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold md:text-base">

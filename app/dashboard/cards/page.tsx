@@ -33,8 +33,8 @@ export default async function Page({
         <h1 className="text-2xl">Cards</h1>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        <SearchGift placeholder="Search gift..." />
-        <SearchGifter placeholder="Search gifter..." />
+        <SearchGift placeholder="Search by gift..." />
+        <SearchGifter placeholder="Search by gifter..." />
         <CreateCard />
       </div>
       <Suspense key={giftQuery + gifterQuery + currentPage} fallback={<InvoicesTableSkeleton />}>

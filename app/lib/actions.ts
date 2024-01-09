@@ -55,7 +55,7 @@ export async function createCard(prevState: State, formData: FormData) {
     } = await supabase.auth.getUser();
 
     if (user) {
-      const letter = await generateLetter(gift);
+      const letter = await generateLetter(gift, gifter);
       const id = uuidv4();
       routeID = id;
       await supabase
@@ -83,7 +83,7 @@ export async function generateNewLetter(card: Card) {
     } = await supabase.auth.getUser();
 
     if (user) {
-      const letter = await generateLetter(card.gift);
+      const letter = await generateLetter(card.gift, card.gifter);
       await supabase
         .from("cards")
         .update({ letter: letter })
@@ -110,11 +110,20 @@ export async function updateStatus(card: Card) {
     } = await supabase.auth.getUser();
 
     if (user) {
-      await supabase
-        .from("cards")
-        .update({ complete: !card.complete })
-        .eq('id', card.id)
-        console.debug('SUCCESS: Update card status')
+      if (!card.complete) {
+        await supabase
+          .from("cards")
+          .update({
+            complete: true,
+            sent_at: `${new Date().toISOString().toLocaleString()}`,
+          })
+          .eq("id", card.id);
+      } else {
+        await supabase
+          .from("cards")
+          .update({ complete: false, sent_at: null })
+          .eq("id", card.id);
+      }
     }
   } catch (error) {
     // If a database error occurs, return a more specific error.

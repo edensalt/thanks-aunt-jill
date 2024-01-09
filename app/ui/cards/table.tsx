@@ -1,6 +1,4 @@
-import Image from 'next/image';
-import { ViewCard, DeleteInvoice } from '@/app/ui/cards/buttons';
-import InvoiceStatus from '@/app/ui/cards/status';
+import { ViewCard } from '@/app/ui/cards/buttons';
 import { formatDateToLocal } from '@/app/lib/utils';
 import { fetchFilteredCards } from '@/app/lib/data';
 import CardStatus from '@/app/card-status';
@@ -14,7 +12,7 @@ export default async function InvoicesTable({
   gifterQuery: string;
   currentPage: number;
 }) {
-  const cards = await fetchFilteredCards(giftQuery, gifterQuery, currentPage);
+  const cards = await fetchFilteredCards(giftQuery, gifterQuery, currentPage, "created_at", false);
 
   return (
     <div className="mt-6 flow-root">
@@ -98,7 +96,6 @@ export default async function InvoicesTable({
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
                       <ViewCard id={card.id} />
-                      {/* <DeleteInvoice id={card.id} /> */}
                     </div>
                   </td>
                 </tr>
