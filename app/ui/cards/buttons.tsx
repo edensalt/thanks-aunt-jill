@@ -1,4 +1,4 @@
-import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { EyeIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 // import { deleteInvoice } from '@/app/lib/actions';
@@ -15,14 +15,14 @@ export function CreateCard() {
   );
 }
 
-export function EditCard({ id }: { id: string }) {
+export function ViewCard({ id }: { id: string }) {
 
   return (
     <Link
-    href={`/dashboard/cards/${id}/edit`}
+    href={`/dashboard/cards/${id}/view`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
-      <PencilIcon className="w-5" />
+      <EyeIcon className="w-5" />
     </Link>
   );
 }

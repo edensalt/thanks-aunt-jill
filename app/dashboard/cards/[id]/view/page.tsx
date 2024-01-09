@@ -1,8 +1,8 @@
-import Form from '@/app/ui/cards/edit-form';
 import Breadcrumbs from '@/app/ui/cards/breadcrumbs';
 import { fetchCardById } from '@/app/lib/data';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import ViewFormCard from '@/app/ui/cards/view-form';
 
 export const metadata: Metadata = {
   title: 'View Card',
@@ -22,13 +22,13 @@ export default async function Page({ params }: { params: { id: string } }) {
         breadcrumbs={[
           { label: 'Cards', href: '/dashboard/cards' },
           {
-            label: 'Edit Card',
+            label: `View Card for ${card.gift}`,
             href: `/dashboard/cards/${id}/view`,
             active: true,
           },
         ]}
       />
-      <div>view card</div>
+      <ViewFormCard card={card} />
     </main>
   );
 }

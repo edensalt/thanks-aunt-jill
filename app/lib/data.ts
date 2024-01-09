@@ -132,7 +132,7 @@ export async function fetchRecentlySentCards() {
 
 }
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 6;
 
 export async function fetchFilteredCards(
   giftQuery: string,
