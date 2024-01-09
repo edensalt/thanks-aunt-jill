@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { Card } from '../global';
 
 const FormSchema = z.object({
   gift: z.string(),
@@ -54,16 +55,13 @@ export async function createCard(prevState: State, formData: FormData) {
     } = await supabase.auth.getUser();
 
     if (user) {
-      console.log('user')
       const letter = await generateLetter(gift);
-      console.log('success')
       const id = uuidv4();
       routeID = id;
       await supabase
         .from("cards")
         .insert({ user_id: user.id, id, gift, gifter, letter});
-
-        console.log('success')
+        console.debug('SUCCESS: Create new card')
     }
   } catch (error) {
     // If a database error occurs, return a more specific error.
@@ -71,10 +69,60 @@ export async function createCard(prevState: State, formData: FormData) {
       message: 'Database Error: Failed to Create Invoice.',
     };
   }
- 
-  console.log('before')
   // Revalidate the cache for the invoices page and redirect the user.
   revalidatePath('/dashboard/cards');
-  console.log('revalidated')
   redirect(`/dashboard/cards/${routeID}/view`);
+}
+
+export async function generateNewLetter(card: Card) {
+  // Insert data into the database
+  try {
+    const supabase = createServerActionClient<Database>({ cookies });
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      const letter = await generateLetter(card.gift);
+      await supabase
+        .from("cards")
+        .update({ letter: letter })
+        .eq('id', card.id)
+        console.debug('SUCCESS: Update card letter')
+    }
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to Create Invoice.',
+    };
+  }
+  // Revalidate the cache for the invoices page and redirect the user.
+  revalidatePath(`/dashboard/cards/${card.id}/view`);
+  redirect(`/dashboard/cards/${card.id}/view`);
+}
+
+export async function deleteCard(card: Card) {
+  // Insert data into the database
+  try {
+    const supabase = createServerActionClient<Database>({ cookies });
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      await supabase
+        .from("cards")
+        .delete()
+        .eq('id', card.id)
+        console.debug('SUCCESS: Card deleted')
+    }
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to Create Invoice.',
+    };
+  }
+  // Revalidate the cache for the invoices page and redirect the user.
+  revalidatePath(`/dashboard/cards`);
+  redirect(`/dashboard/cards`);
 }
