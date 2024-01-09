@@ -5,6 +5,8 @@ import { ArrowPathIcon, CheckBadgeIcon } from "@heroicons/react/24/outline";
 import { formatDateToLocal } from "@/app/lib/utils";
 import { fetchRecentlySentCards } from "@/app/lib/data";
 
+export const dynamic = "force-dynamic";
+
 export default async function RecentlySent() {
   const recentlySentCards = await fetchRecentlySentCards();
 

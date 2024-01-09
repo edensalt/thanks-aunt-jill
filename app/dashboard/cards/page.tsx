@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   description: 'View all of your thank you cards.'
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function Page({
   searchParams,
 }: {

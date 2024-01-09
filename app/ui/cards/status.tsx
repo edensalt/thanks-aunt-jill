@@ -5,6 +5,8 @@ import clsx from "clsx";
 import { CheckBadgeIcon, ClockIcon } from "@heroicons/react/24/outline";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
+export const dynamic = "force-dynamic";
+
 export default function CardStatus({ card }: { card: CardWithAuthor }) {
   const router = useRouter();
   const handleStatusUpdate = async () => {

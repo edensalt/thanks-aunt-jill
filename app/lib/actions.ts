@@ -10,6 +10,7 @@ import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { generateLetter } from "@/app/lib/chat";
 import { Card } from '../global';
 
+
 const FormSchema = z.object({
   gift: z.string(),
   gifter: z.string(),

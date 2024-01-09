@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   title: 'View Card | Thanks Aunt Jill',
   description: 'View your thank you card and generate new letter content powered by AI.'
 };
+
+export const dynamic = "force-dynamic";
  
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;

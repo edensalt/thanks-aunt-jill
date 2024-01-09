@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { unstable_noStore as noStore } from 'next/cache';
 
-
 export async function fetchOldestPendingCards() {
   noStore();
 

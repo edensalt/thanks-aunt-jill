@@ -5,6 +5,8 @@ import { ArrowPathIcon, ClockIcon } from "@heroicons/react/24/outline";
 import { formatDateToLocal } from "@/app/lib/utils";
 import { fetchOldestPendingCards } from "@/app/lib/data";
 
+export const dynamic = "force-dynamic";
+
 export default async function OldestPending() {
   const oldestPendingCards = await fetchOldestPendingCards();
 

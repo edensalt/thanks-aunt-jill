@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { generatePagination } from '@/app/lib/utils';
 
+export const dynamic = "force-dynamic";
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
   const pathname = usePathname();

@@ -14,6 +14,9 @@ const iconMap = {
   total: EnvelopeIcon,
 };
 
+export const dynamic = "force-dynamic";
+
+
 export default async function CardWrapper() {
   const supabase = createServerComponentClient<Database>({ cookies });
 

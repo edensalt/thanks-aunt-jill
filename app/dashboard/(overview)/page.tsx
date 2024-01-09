@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description: 'AI Generated Thank You Cards',
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
   return (
     <main>

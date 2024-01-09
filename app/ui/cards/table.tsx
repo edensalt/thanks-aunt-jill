@@ -3,6 +3,9 @@ import { formatDateToLocal } from '@/app/lib/utils';
 import { fetchFilteredCards } from '@/app/lib/data';
 import CardStatus from '@/app/ui/cards/status';
 
+export const dynamic = "force-dynamic";
+
+
 export default async function CardsTable({
   giftQuery,
   gifterQuery,

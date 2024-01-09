@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   title: 'Create Card | Thanks Aunt Jill',
   description: 'Create a new thank you card and generate a letter powered by AI.'
 };
+
+export const dynamic = "force-dynamic";
  
 export default async function Page() {
  
