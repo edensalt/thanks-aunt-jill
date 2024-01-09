@@ -96,8 +96,8 @@ export async function generateNewLetter(card: Card) {
       message: 'Database Error: Failed to Update Card Letter.',
     };
   }
-  // Revalidate the cache for the invoices page and redirect the user.
-  revalidatePath(`/dashboard/cards/${card.id}/view`);
+  // Revalidate the cache for the cards page and redirect the user.
+  revalidatePath(`/dashboard/cards/`);
   redirect(`/dashboard/cards/${card.id}/view`);
 }
 

@@ -1,19 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { GiftIcon, UserIcon } from "@heroicons/react/24/outline";
+import { ArrowPathIcon, GiftIcon, UserIcon } from "@heroicons/react/24/outline";
 
 import { useFormState } from "react-dom";
 import { createCard } from "@/app/lib/actions";
+import { useState } from "react";
 
 export const dynamic = "force-dynamic";
 
 export default function CreateCardForm() {
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(createCard, initialState);
+  const [submitting, setSubmitting] = useState(false);
 
   return (
-    <form action={dispatch}>
+    <form action={dispatch} onSubmit={() => setSubmitting(true)}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         <div className="mb-4">
           <label htmlFor="amount" className="mb-2 block text-sm font-medium">
@@ -55,13 +57,13 @@ export default function CreateCardForm() {
               />
               <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
               <div id="customer-error" aria-live="polite" aria-atomic="true">
-              {state.errors?.gifter &&
-                state.errors.gifter.map((error: string) => (
-                  <p className="mt-2 text-sm text-red-500" key={error}>
-                    {error}
-                  </p>
-                ))}
-            </div>
+                {state.errors?.gifter &&
+                  state.errors.gifter.map((error: string) => (
+                    <p className="mt-2 text-sm text-red-500" key={error}>
+                      {error}
+                    </p>
+                  ))}
+              </div>
             </div>
           </div>
         </div>
@@ -74,12 +76,23 @@ export default function CreateCardForm() {
           Cancel
         </Link>
         {/* TODO: Have loader after submitting form */}
-        <button
-          className="flex h-10 items-center rounded-lg bg-green-100 px-4 text-sm font-medium text-green-600 transition-colors hover:bg-green-200"
-          type="submit"
-        >
-          Generate Card
-        </button>
+        {submitting ? (
+          <button
+            className="flex h-10 items-center rounded-lg bg-green-100 px-4 text-sm font-medium text-green-600 transition-colors hover:bg-green-200"
+            type="button"
+            disabled
+          >
+            <ArrowPathIcon className="animate-spin stroke-green-600 h-6 w-6" />{" "}
+            <p className="ml-2">Generating Card</p>
+          </button>
+        ) : (
+          <button
+            className="flex h-10 items-center rounded-lg bg-green-100 px-4 text-sm font-medium text-green-600 transition-colors hover:bg-green-200"
+            type="submit"
+          >
+            Generate Card
+          </button>
+        )}
       </div>
     </form>
   );
