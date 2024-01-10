@@ -6,7 +6,7 @@ Thanks Aunt Jill has you covered, creating a one-stop shop to keep track of your
 
 Once you add a gift to your list, Thanks Aunt Jill generates a thoughtful thank you letter, powered by OpenAI. Your dashboard keeps track of thank you cards you need to send, so you'll never forget to share your gratitude. Once sent, you can look back on all of the gifts you've received from family and friends.
 
-<img src="/thanks-aunt-jill-dashboard.png" alt="screenshot of thanks aunt jill app">
+<img src="/public/thanks-aunt-jill-dashboard.png" alt="screenshot of thanks aunt jill app">
 
 ## Skills demonstrated
 
@@ -25,12 +25,12 @@ Once you add a gift to your list, Thanks Aunt Jill generates a thoughtful thank 
 
 - Generate thank you card
 
-<img src="/thanks-aunt-jill-create.gif" alt="basic function of app">
+<img src="/public/thanks-aunt-jill-create.gif" alt="basic function of app">
 
 - Search for gifts in the table
 
-<img src="./thanks-aunt-jill-table.gif" alt="sorting through table">
+<img src="/public/thanks-aunt-jill-table.gif" alt="sorting through table">
 
 - Login with Google OAuth
 
-<img src="/thanks-aunt-jill-login.png" alt="screenshot of login page">
+<img src="/public/thanks-aunt-jill-login.png" alt="screenshot of login page">
