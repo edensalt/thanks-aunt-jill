@@ -34,12 +34,12 @@ export default function ViewFormCard({ card }: { card: Card }) {
               className={`relative ${
                 card.complete
                   ? "text-green-500 stroke-green-500 bg-green-100 border-green-500"
-                  : "text-red-500 stroke-red-500 bg-red-100 border-red-500"
+                  : "text-gray-500 stroke-gray-500 bg-gray-100 border-gray-500"
               }`}
             >
               <div
                 className={`peer block w-full rounded-md border py-2 pl-10 pr-2 text-sm outline-2 ${
-                  card.complete ? "border-green-500" : "border-red-500"
+                  card.complete ? "border-green-500" : "border-gray-500"
                 }`}
               >
                 {card.complete ? <p>Card sent</p> : <p>Card not sent</p>}
