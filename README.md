@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# thanks-aunt-jill
 
-## Getting Started
+Whether you just got married or wrapped up the holiday season, it can be overwhelming to send dozens of thank you cards for your gifts.
 
-First, run the development server:
+Thanks Aunt Jill has you covered, creating a one-stop shop to keep track of your thank you cards, and giving you a little boost to help write them, too!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Once you add a gift to your list, Thanks Aunt Jill generates a thoughtful thank you letter, powered by OpenAI. Your dashboard keeps track of thank you cards you need to send, so you'll never forget to share your gratitude. Once sent, you can look back on all of the gifts you've received from family and friends.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<img src="/thanks-aunt-jill-dashboard.png" alt="screenshot of thanks aunt jill app">
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Skills demonstrated
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Next.js
+- Tailwind CSS
+- PostgreSQL
 
-## Learn More
+## Tools Used
 
-To learn more about Next.js, take a look at the following resources:
+- OpenAI
+- Supabase
+- Google OAuth
+- Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Generate thank you card
 
-## Deploy on Vercel
+<img src="/thanks-aunt-jill-create.gif" alt="basic function of app">
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Search for gifts in the table
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<img src="./thanks-aunt-jill-table.gif" alt="sorting through table">
+
+- Login with Google OAuth
+
+<img src="/thanks-aunt-jill-login.png" alt="screenshot of login page">
