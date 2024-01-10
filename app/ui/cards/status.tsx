@@ -41,15 +41,15 @@ export default function CardStatus({ card }: { card: CardWithAuthor }) {
       onClick={handleStatusUpdate}
       onMouseEnter={() => setFocus(true)}
       onMouseLeave={() => setFocus(false)}
+      className="w-full h-full flex justify-start items-center"
     >
       <span
         className={clsx(
           "inline-flex items-center rounded-full px-2 py-1 text-xs",
           {
-            "bg-gray-100 hover:bg-[#f6afb9] text-gray-500 hover:text-white stroke-white hover:stroke-gray-500":
-              !card.complete,
-            "bg-[#f6afb9] hover:bg-gray-100 text-white hover:text-gray-500 stroke-gray-500 hover:stroke-white":
-              card.complete,
+            "bg-gray-100 text-gray-500 stroke-gray-500":
+              (!card.complete && !focus) || (card.complete && focus),
+            "bg-[#f6afb9] text-white stroke-white": (card.complete && !focus) || (!card.complete && focus),
           }
         )}
       >
